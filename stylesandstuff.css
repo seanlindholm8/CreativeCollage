@@ -1,0 +1,542 @@
+@font-face {
+    font-family: 'Comix Loud';
+    src: url('../Fonts/Comix Loud.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    padding: 12px clamp(24px, 6vw, 96px);
+    position: relative;
+    isolation: isolate;
+    background: linear-gradient(to bottom, #F9A03F 0%, #F1D302 25%, #F1D302 75%, #F9A03F 100%);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: url("cardboard-texture.jpg") center top / cover no-repeat;
+    mix-blend-mode: soft-light;
+    filter: brightness(0.9) contrast(2.4);
+    opacity: 0.55;
+    pointer-events: none;
+}
+
+@media (min-width: 901px) {
+    body::before {
+        position: fixed;
+    }
+}
+
+h1,
+h2 {
+    font-family: 'Comix Loud', Arial, Helvetica, sans-serif;
+    font-weight: 900;
+    text-transform: uppercase;
+}
+
+h1 {
+    margin: 0;
+    font-size: clamp(1.25rem, 3.5vw, 2.5rem);
+}
+
+h2 {
+    margin: 0;
+    font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+}
+
+.header-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 18px 0;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.7);
+}
+
+.header-bar a {
+    color: black;
+    text-decoration: none;
+}
+
+.header-brand {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+}
+
+.header-brand svg {
+    width: 24px;
+    height: 24px;
+    fill: currentColor;
+}
+
+.nav-links {
+    display: flex;
+    gap: 8px;
+}
+
+.nav-links a {
+    padding: 8px 12px;
+    border: 2px solid transparent;
+}
+
+.nav-links a:hover {
+    border-color: black;
+}
+
+.nav-links a:focus {
+    border-color: transparent;
+}
+
+.header-bar a:focus-visible {
+    outline: 3px solid white;
+    outline-offset: 3px;
+}
+
+header {
+    min-height: clamp(180px, 30vh, 320px);
+    margin: clamp(20px, 5vw, 70px) calc(50% - 50vw) clamp(30px, 5vw, 65px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.title-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    mix-blend-mode: multiply;
+    opacity: 0.9;
+}
+
+.title-name {
+    margin: 0 0 clamp(6px, 1vw, 12px);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: clamp(1rem, 2vw, 1.5rem);
+    font-weight: 900;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.title-block h1 {
+    line-height: 0.9;
+}
+
+.category-nav {
+    max-width: 620px;
+    margin: 0 auto clamp(24px, 4vw, 48px);
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.category-card {
+    min-height: 92px;
+    padding: 18px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 3px solid rgba(0, 0, 0, 0.8);
+    background: rgba(255, 255, 255, 0.12);
+    color: black;
+    text-decoration: none;
+    font-family: 'Comix Loud', Arial, Helvetica, sans-serif;
+    font-size: clamp(0.8rem, 1.5vw, 1.05rem);
+    font-weight: 900;
+    text-transform: uppercase;
+    text-align: center;
+    box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.75);
+    transition: transform 100ms ease-out, box-shadow 100ms ease-out, background-color 100ms ease-out;
+}
+
+.category-card:hover,
+.category-card:focus-visible {
+    background: rgba(255, 255, 255, 0.28);
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.75);
+}
+
+.category-card:focus-visible {
+    outline: 3px solid white;
+    outline-offset: 3px;
+}
+
+.category-card.active {
+    background: rgba(0, 0, 0, 0.12);
+}
+
+.category-card.commission-card {
+    grid-column: 1 / -1;
+}
+
+main {
+    max-width: 1200px;
+    margin: 0 auto;
+    column-count: 4;
+    column-gap: 12px;
+}
+
+.artwork {
+    width: 100%;
+    margin: 0 0 12px;
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+    transition: transform 100ms ease-out 20ms;
+}
+
+.artwork[data-paper] {
+    overflow: visible;
+}
+
+.artwork[data-paper="5x7"] {
+    aspect-ratio: 5 / 7;
+}
+
+.artwork[data-paper="5x7"][data-orientation="landscape"] {
+    aspect-ratio: 7 / 5;
+}
+
+.artwork[data-paper="comic"] {
+    aspect-ratio: 53 / 85;
+}
+
+.artwork[data-paper="square"] {
+    aspect-ratio: 1;
+}
+
+.artwork[data-paper] > .artwork-shadow {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+    filter:
+        drop-shadow(-8px 8px 3px rgba(0, 0, 0, 0.85))
+        drop-shadow(-8px 15px 8px rgba(0, 0, 0, 0.25));
+    mix-blend-mode: multiply;
+    opacity: 0.9;
+    pointer-events: none;
+}
+
+.artwork[data-paper] > img:not(.artwork-shadow) {
+    position: relative;
+    z-index: 1;
+    filter: brightness(1.15) saturate(1.25);
+}
+
+.artwork:hover {
+    transform: scale(1.03);
+}
+
+.artwork:focus-visible {
+    outline: none;
+}
+
+.artwork:focus-visible > img:not(.artwork-shadow) {
+    filter:
+        brightness(1.15)
+        saturate(1.25)
+        drop-shadow(0 0 30px #fff)
+        drop-shadow(0 0 5px #fff);
+}
+
+.artwork img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+footer {
+    min-height: clamp(180px, 25vh, 280px);
+    margin: clamp(20px, 5vw, 70px) calc(50% - 50vw) clamp(30px, 5vw, 65px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: clamp(0.75rem, 2vw, 1rem);
+}
+
+.footer-grid {
+    width: min(1200px, calc(100% - 48px));
+    display: grid;
+    grid-template-columns: 1fr 1fr 1.5fr;
+    gap: clamp(16px, 4vw, 48px);
+    padding-top: 24px;
+    border-top: 2px solid black;
+}
+
+.footer-grid p {
+    margin: 0;
+}
+
+.footer-grid p:last-child {
+    text-align: right;
+}
+
+.footer-label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 900;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.project-dialog {
+    width: min(1100px, calc(100vw - 32px));
+    height: min(760px, calc(100vh - 32px));
+    padding: 0;
+    border: 0;
+    border-radius: 4px;
+    overflow: hidden;
+    background: transparent;
+    color: #f5f5f5;
+    box-shadow: 0 18px 60px rgba(0, 0, 0, 0.35);
+}
+
+.project-dialog::backdrop {
+    background: rgba(18, 18, 18, 0.56);
+    backdrop-filter: blur(8px);
+}
+
+.project-dialog[open] {
+    animation: show-dialog 160ms ease-out;
+}
+
+@keyframes show-dialog {
+    from {
+        opacity: 0;
+        transform: scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.dialog-layout {
+    height: 100%;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    background: rgba(42, 42, 42, 0.78);
+    backdrop-filter: blur(18px);
+    color: #f5f5f5;
+}
+
+.dialog-image {
+    min-height: 0;
+    background-color: transparent;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dialog-image img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    transition: transform 120ms ease-out;
+    cursor: grab;
+    user-select: none;
+    touch-action: none;
+}
+
+.dialog-image img.is-panning {
+    cursor: grabbing;
+    transition: none;
+}
+
+.zoom-controls {
+    position: absolute;
+    left: 16px;
+    bottom: 16px;
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    padding: 6px 8px;
+    border: 1px solid rgba(255, 255, 255, 0.24);
+    border-radius: 8px;
+    background: rgba(30, 30, 30, 0.82);
+    color: #f5f5f5;
+    backdrop-filter: blur(12px);
+}
+
+.zoom-controls input {
+    width: 160px;
+    cursor: pointer;
+}
+
+.zoom-controls span {
+    min-width: 48px;
+    text-align: right;
+    font-size: 0.85rem;
+}
+
+.dialog-image img {
+    transform-origin: center center;
+}
+
+.dialog-layout {
+    position: relative;
+}
+
+.dialog-navigation {
+    margin-top: auto;
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding-top: 24px;
+}
+
+.dialog-navigation button {
+    width: 44px;
+    height: 44px;
+    display: grid;
+    place-items: center;
+    border: 2px solid rgba(255, 255, 255, 0.72);
+    border-radius: 12px;
+    background: transparent;
+    color: #f5f5f5;
+    cursor: pointer;
+    transition: background 160ms ease, color 160ms ease, transform 160ms ease;
+}
+
+.dialog-navigation button:hover,
+.dialog-navigation button:focus-visible {
+    background: rgba(255, 255, 255, 0.16);
+    color: white;
+    transform: translateY(-2px);
+}
+
+.dialog-navigation button:focus-visible {
+    outline: 3px solid #f1d302;
+    outline-offset: 3px;
+}
+
+.dialog-navigation svg {
+    width: 20px;
+    height: 20px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2.25;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.artist-panel {
+    padding: clamp(24px, 4vw, 48px);
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    overflow-y: auto;
+}
+
+.artist-panel p {
+    line-height: 1.6;
+}
+
+.artwork-details {
+    margin: 16px 0 24px;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+}
+
+.close-dialog {
+    align-self: flex-end;
+    margin-bottom: 24px;
+    padding: 8px 12px;
+    border: 0;
+    background: #111;
+    color: white;
+    cursor: pointer;
+}
+
+@media (max-width: 900px) {
+    main {
+        column-count: 2;
+    }
+}
+
+@media (max-width: 600px) {
+    body {
+        padding: 12px;
+    }
+
+    .header-bar {
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 12px 0;
+    }
+
+    .nav-links {
+        width: 100%;
+        justify-content: space-between;
+        gap: 4px;
+    }
+
+    .nav-links a {
+        flex: 1;
+        padding: 8px 4px;
+        text-align: center;
+    }
+
+    header {
+        margin-top: 25px;
+        margin-bottom: 30px;
+    }
+
+    .title-block h1 {
+        line-height: 1.8;
+    }
+
+    .category-card {
+        min-height: 72px;
+        padding: 14px 10px;
+    }
+
+    .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+
+    .footer-grid p,
+    .footer-grid p:last-child {
+        text-align: left;
+    }
+
+    main {
+        column-count: 1;
+    }
+
+    .dialog-layout {
+        grid-template-columns: 1fr;
+        grid-template-rows: minmax(250px, 65vh) auto;
+        overflow-y: auto;
+    }
+
+    .dialog-image {
+        min-height: 250px;
+    }
+}
