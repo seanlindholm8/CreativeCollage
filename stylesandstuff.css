@@ -387,8 +387,54 @@ footer {
 }
 
 .zoom-controls input {
+    appearance: none;
+    -webkit-appearance: none;
     width: 160px;
+    height: 48px;
+    margin: 0;
+    background: transparent;
     cursor: pointer;
+}
+
+.zoom-controls input::-webkit-slider-runnable-track {
+    height: 6px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.6);
+}
+
+.zoom-controls input::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 28px;
+    height: 48px;
+    margin-top: -21px;
+    border: 0;
+    border-radius: 0;
+    background: url("Track dial.png") center / 48px 48px no-repeat;
+}
+
+.zoom-controls input::-moz-range-track {
+    height: 6px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.6);
+}
+
+.zoom-controls input::-moz-range-progress {
+    height: 6px;
+    border-radius: 999px;
+    background: #f1d302;
+}
+
+.zoom-controls input::-moz-range-thumb {
+    width: 28px;
+    height: 48px;
+    border: 0;
+    border-radius: 0;
+    background: url("Track dial.png") center / 48px 48px no-repeat;
+}
+
+.zoom-controls input:focus-visible {
+    outline: 2px solid #f1d302;
+    outline-offset: 2px;
 }
 
 .zoom-controls span {
@@ -520,6 +566,14 @@ footer {
         padding: 14px 10px;
     }
 
+    .project-dialog {
+        height: calc(100vh - 24px);
+        height: calc(100dvh - 24px);
+        overflow-x: hidden;
+        overflow-y: auto;
+        overscroll-behavior: contain;
+    }
+
     .footer-grid {
         grid-template-columns: 1fr;
         gap: 18px;
@@ -535,12 +589,31 @@ footer {
     }
 
     .dialog-layout {
+        height: auto;
+        min-height: 100%;
         grid-template-columns: 1fr;
-        grid-template-rows: minmax(250px, 65vh) auto;
-        overflow-y: auto;
+        grid-template-rows: minmax(250px, 40vh) auto;
+        overflow: visible;
     }
 
     .dialog-image {
         min-height: 250px;
+    }
+
+    .artist-panel {
+        overflow: visible;
+        padding: 24px 20px max(24px, env(safe-area-inset-bottom));
+    }
+
+    .close-dialog {
+        position: sticky;
+        top: 0;
+        z-index: 1;
+    }
+
+    .zoom-controls {
+        position: static;
+        align-self: flex-start;
+        margin-bottom: 16px;
     }
 }
