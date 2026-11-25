@@ -203,6 +203,16 @@ main {
 
 .artwork[data-paper] {
     overflow: visible;
+    background: var(--paper-texture) center / 100% 100% no-repeat;
+    mask-image: var(--paper-texture);
+    mask-size: 100% 100%;
+    mask-repeat: no-repeat;
+    -webkit-mask-image: var(--paper-texture);
+    -webkit-mask-size: 100% 100%;
+    -webkit-mask-repeat: no-repeat;
+    filter:
+        drop-shadow(-8px 8px 3px rgba(0, 0, 0, 0.85))
+        drop-shadow(-8px 15px 8px rgba(0, 0, 0, 0.25));
 }
 
 .artwork[data-paper="5x7"] {
@@ -221,24 +231,13 @@ main {
     aspect-ratio: 1;
 }
 
-.artwork[data-paper] > .artwork-shadow {
+.artwork[data-paper] > img:not(.artwork-shadow) {
     position: absolute;
     inset: 0;
-    z-index: 0;
     width: 100%;
     height: 100%;
-    object-fit: fill;
-    filter:
-        drop-shadow(-8px 8px 3px rgba(0, 0, 0, 0.85))
-        drop-shadow(-8px 15px 8px rgba(0, 0, 0, 0.25));
+    object-fit: cover;
     mix-blend-mode: multiply;
-    opacity: 0.9;
-    pointer-events: none;
-}
-
-.artwork[data-paper] > img:not(.artwork-shadow) {
-    position: relative;
-    z-index: 1;
     filter: brightness(1.15) saturate(1.25);
 }
 
