@@ -203,6 +203,14 @@ main {
 
 .artwork[data-paper] {
     overflow: visible;
+    filter:
+        drop-shadow(-8px 8px 3px rgba(0, 0, 0, 0.85))
+        drop-shadow(-8px 15px 8px rgba(0, 0, 0, 0.25));
+}
+
+.paper-sheet {
+    position: absolute;
+    inset: 0;
     background: var(--paper-texture) center / 100% 100% no-repeat;
     mask-image: var(--paper-texture);
     mask-size: 100% 100%;
@@ -210,9 +218,6 @@ main {
     -webkit-mask-image: var(--paper-texture);
     -webkit-mask-size: 100% 100%;
     -webkit-mask-repeat: no-repeat;
-    filter:
-        drop-shadow(-8px 8px 3px rgba(0, 0, 0, 0.85))
-        drop-shadow(-8px 15px 8px rgba(0, 0, 0, 0.25));
 }
 
 .artwork[data-paper="5x7"] {
@@ -231,7 +236,7 @@ main {
     aspect-ratio: 1;
 }
 
-.artwork[data-paper] > img:not(.artwork-shadow) {
+.artwork[data-paper] > .paper-sheet > img {
     position: absolute;
     inset: 0;
     width: 100%;
@@ -249,7 +254,7 @@ main {
     outline: none;
 }
 
-.artwork:focus-visible > img:not(.artwork-shadow) {
+.artwork:focus-visible .paper-sheet > img {
     filter:
         brightness(1.15)
         saturate(1.25)
